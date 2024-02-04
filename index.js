@@ -1,36 +1,39 @@
 import inquirer from 'inquirer';
 
-const array = Array(10000000)
+const array = Array(50000000)
   .fill(0)
   .map((_, index) => index);
 
-inquirer
-  .prompt([
-    {
-      name: 'list',
-      type: 'list',
-      message: 'Select the type of function to use for index search:',
-      choices: [
-        'Binary search, iterative',
-        'Binary search, recursive',
-        'Linear search',
-      ],
-    },
-    {
-      type: 'input',
-      message: 'select number 1-10000000',
-      name: 'number',
-    },
-  ])
-  .then((response) => {
-    if ((response.list = 'Binary search, iterative')) {
-      console.log(response.number);
-      binarySearchIterative(array, response.number);
-    } else if ((response.list = 'Binary search, recursive')) {
-      console.log(response.number);
-      binarySearchRecursive(array, response.number);
-    }
-  });
+function question() {
+  inquirer
+    .prompt([
+      {
+        name: 'list',
+        type: 'list',
+        message: 'Select the type of function to use for index search:',
+        choices: [
+          'Binary search, iterative',
+          'Binary search, recursive',
+          'Linear search',
+        ],
+      },
+      {
+        type: 'input',
+        message: 'select number 1-50000000',
+        name: 'number',
+      },
+    ])
+    .then((response) => {
+      if ((response.list = 'Binary search, iterative')) {
+        binarySearchIterative(array, response.number);
+      } else if ((response.list = 'Binary search, recursive')) {
+        binarySearchRecursive(array, response.number);
+      } else if ((response.list = 'Linear search')) {
+        linearSearch(array, response.number);
+      }
+    });
+}
+question();
 
 function binarySearchIterative(array, value) {
   console.log(value);
@@ -47,8 +50,9 @@ function binarySearchIterative(array, value) {
       console.log(
         `It took me ${
           finishTimer - startTimer
-        } milliseconds complete the search`
+        } milliseconds to complete the search using binary search iterative method`
       );
+      question();
       return true;
     } else if (array[mid] < val) {
       low_point = mid + 1;
@@ -74,10 +78,31 @@ function binarySearchRecursive(array, value) {
   if (array[mid] === val) {
     const finishTimer = performance.now();
     console.log(
-      `It took me ${finishTimer - startTimer} milliseconds complete the search`
+      `It took me ${
+        finishTimer - startTimer
+      } milliseconds complete the search using the binary search recursive method`
     );
+    question();
     return true;
   }
   if (array[mid] > x) return recursiveFunction(array, val, low_point, mid - 1);
   else return recursiveFunction(array, val, mid + 1, hi_point);
+}
+
+function linearSearch(array, value) {
+  let val = Number(value);
+  const startTimer = performance.now();
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === val) {
+      const finishTimer = performance.now();
+      console.log(
+        `It took me ${
+          finishTimer - startTimer
+        } milliseconds complete the search using the linear search method`
+      );
+      question();
+      return true;
+    }
+  }
+  return false;
 }
