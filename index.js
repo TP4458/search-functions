@@ -1,6 +1,6 @@
 import inquirer from 'inquirer';
 
-const array = Array(50000000)
+const array = Array(50000001)
   .fill(0)
   .map((_, index) => index);
 
