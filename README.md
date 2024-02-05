@@ -2,7 +2,7 @@
 
 ## Description
 
-This node application displays the search time of a number in an array when using different search functions. It was build to compare search times for linear, and binary search using recursive and iterative methods.
+This node application displays the time it takes a function to search for a number in an array. It was build to compare times for linear and binary searches using recursive and iterative methods.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -22,11 +22,13 @@ This node application displays the search time of a number in an array when usin
 
 ## Installation
 
-Clone the respository, run npm i to install dependencies (inquirer).
+Clone the respository, run **_npm i_** to install dependencies (inquirer).
 
 ## Usage
 
-NOTE: By default this application will build and populate an array with an index of 50.000.000. This will cause the app to take longer than expected time to start. Once started, select the search method you wish to use to iterate though the array in search of a number, and then enter the number you wish to search for.
+**NOTE: By default this application will build and populate an array with an index of 50.000.000. This will cause the app to take longer than expected time to start.**
+
+Once started, select the search method you wish to use to iterate though the array in search of a number, and then enter the number you wish to search for.
 
 ## Contributing
 
