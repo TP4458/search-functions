@@ -1,6 +1,6 @@
 import inquirer from 'inquirer';
 
-const array = Array(500)
+const array = Array(50000000)
   .fill(0)
   .map((_, index) => index);
 
@@ -35,15 +35,9 @@ function question() {
           linearSearch(array, response.number);
           break;
       }
-      // if ((response.list = 'Binary search, iterative')) {
-      //   binarySearchIterative(array, response.number);
-      // } else if ((response.list = 'Binary search, recursive')) {
-      //   binarySearchRecursive(array, response.number);
-      // } else if ((response.list = 'Linear search')) {
-      //   linearSearch(array, response.number);
-      // }
     });
 }
+//start
 question();
 
 function binarySearchIterative(array, value) {
@@ -95,9 +89,10 @@ function binarySearchRecursive(array, value) {
     question();
     return true;
   }
-  if (array[mid] > val)
-    return recursiveFunction(array, val, low_point, mid - 1);
-  else return recursiveFunction(array, val, mid + 1, hi_point);
+  if (array[mid] > val) return binarySearchRecursive(array.slice(0, mid), val);
+  else {
+    return binarySearchRecursive(array.slice(mid), val);
+  }
 }
 
 function linearSearch(array, value) {
@@ -116,21 +111,4 @@ function linearSearch(array, value) {
     }
   }
   return false;
-}
-
-function linearLongTest() {
-  const startTimer = performance.now();
-  for (let val = 1; val < array.length; val + 1000000) {
-    for (let i = 0; i < array.length; i++) {
-      if (array[i] === val) {
-        return true;
-      }
-    }
-    const finishTimer = performance.now();
-    console.log(
-      `It took me ${
-        finishTimer - startTimer
-      } milliseconds complete the search using the linear search method.`
-    );
-  }
 }
