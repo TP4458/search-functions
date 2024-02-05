@@ -41,9 +41,7 @@ function question() {
 question();
 
 function binarySearchIterative(array, value) {
-  console.log(value);
   let val = Number(value);
-  console.log(val);
   let low_point = 0;
   let hi_point = array.length - 1;
   const startTimer = performance.now();
