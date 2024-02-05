@@ -1,6 +1,6 @@
 import inquirer from 'inquirer';
 
-const array = Array(50000000)
+const array = Array(500)
   .fill(0)
   .map((_, index) => index);
 
@@ -24,13 +24,24 @@ function question() {
       },
     ])
     .then((response) => {
-      if ((response.list = 'Binary search, iterative')) {
-        binarySearchIterative(array, response.number);
-      } else if ((response.list = 'Binary search, recursive')) {
-        binarySearchRecursive(array, response.number);
-      } else if ((response.list = 'Linear search')) {
-        linearSearch(array, response.number);
+      switch (response.list) {
+        case 'Binary search, iterative':
+          binarySearchIterative(array, response.number);
+          break;
+        case 'Binary search, recursive':
+          binarySearchRecursive(array, response.number);
+          break;
+        case 'Linear search':
+          linearSearch(array, response.number);
+          break;
       }
+      // if ((response.list = 'Binary search, iterative')) {
+      //   binarySearchIterative(array, response.number);
+      // } else if ((response.list = 'Binary search, recursive')) {
+      //   binarySearchRecursive(array, response.number);
+      // } else if ((response.list = 'Linear search')) {
+      //   linearSearch(array, response.number);
+      // }
     });
 }
 question();
@@ -45,12 +56,11 @@ function binarySearchIterative(array, value) {
   while (low_point <= hi_point) {
     let mid = Math.floor((low_point + hi_point) / 2);
     if (array[mid] === val) {
-      console.log(`value found at index position ${mid}`);
       const finishTimer = performance.now();
       console.log(
         `It took me ${
           finishTimer - startTimer
-        } milliseconds to complete the search using binary search iterative method`
+        } milliseconds to complete the search using binary search iterative method. Your number was found at position ${mid}`
       );
       question();
       return true;
@@ -80,12 +90,13 @@ function binarySearchRecursive(array, value) {
     console.log(
       `It took me ${
         finishTimer - startTimer
-      } milliseconds complete the search using the binary search recursive method`
+      } milliseconds complete the search using the iterative search recursive method. Your number was found at position ${mid}`
     );
     question();
     return true;
   }
-  if (array[mid] > x) return recursiveFunction(array, val, low_point, mid - 1);
+  if (array[mid] > val)
+    return recursiveFunction(array, val, low_point, mid - 1);
   else return recursiveFunction(array, val, mid + 1, hi_point);
 }
 
@@ -98,11 +109,28 @@ function linearSearch(array, value) {
       console.log(
         `It took me ${
           finishTimer - startTimer
-        } milliseconds complete the search using the linear search method`
+        } milliseconds complete the search using the linear search method. Your number was found at position ${i}`
       );
       question();
       return true;
     }
   }
   return false;
+}
+
+function linearLongTest() {
+  const startTimer = performance.now();
+  for (let val = 1; val < array.length; val + 1000000) {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i] === val) {
+        return true;
+      }
+    }
+    const finishTimer = performance.now();
+    console.log(
+      `It took me ${
+        finishTimer - startTimer
+      } milliseconds complete the search using the linear search method.`
+    );
+  }
 }
